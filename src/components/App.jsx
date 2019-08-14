@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
-import Greeting from './greeting';
+import SearchForm from './SearchForm';
+import GeocodeResult from './GeocodeResult';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'John',
     };
   }
 
-handleNameOnChange(e) {
-  this.setState({ name: e.target.value });
-}
-
-handleBobClicked() {
-  this.setState({ name: 'Bob' });
-}
+  handlePlaceSubmit(place) {
+    console.log(place);
+  }
 
   render() {
     return (
       <div>
-        <input
-          type="text"
-           value={this.state.name}
-           onChange={e => this.handleNameOnChange(e)}
+        <h1>緯度経度検索</h1>
+        <SearchForm onSubmit={place => this.handlePlaceSubmit(place)} />
+        <GeocodeResult
+          address={this.state.address}
+          lat={this.state.lat}
+          lng={this.state.lng}
         />
-        <button onClick={() => this.handleBobClicked()}>I am Bob</button>
-        <Greeting name={this.state.name} />
       </div>
     );
   }
